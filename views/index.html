@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login to Salesforce </title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon"  type="image/icon"  href="Cloud Red.ico" />
+  </head>
+  <body class="container" style="padding-top: 50px;">
+    <div class="jumbotron">
+      <h1>Login to Salesforce</h1>
+		<p>
+          <table  style="width:100%">
+            <tr>
+                <td  style="width:80%"> 
+                    <b> Salesforce and NodeJs Boiler plate </b> <br />
+                    To Start using, Select your Salesforce instance <br />
+                    By Dev Goyal
+                </td> 
+                <td style="width:20%">
+                    <img src="Salesforce.png" />
+                </td>
+            </tr>
+          </table>  
+      </p>  
+    </div>
+	
+	<div class="jumbotron">
+		<p>
+		 <h2>Web Server OAuth Flow.</h2>
+		  <p><i class="note">Note : If your server can secure client secret. Apps hosted on a secure server use the web server authentication flow. A critical aspect of the web server flow is that the server must be able to protect the client secret. This flow uses an OAuth 2.0 authorization code grant type.</i></p>
+		  <a id="prodBtn_webServer" role="button" style="margin-right:40px" class="btn btn-primary btn-lg">Production</a>
+		  <a id="sandBtn_webServer" role="button" class="btn btn-primary btn-lg">Sandbox</a>
+	  </p>
+	</div>
+
+	<div class="jumbotron">
+		<p>
+		 <h2>User Agent OAuth Flow.</h2>
+		  <p><i class="note">Note : If your server cannot secure client secret. Users can authorize a desktop or mobile application to access data using an external or embedded browser (or user agent) for authentication. These apps often use a scripting language, such as JavaScript, running within the browser. This flow uses the OAuth 2.0 implicit grant type.</i></p>
+		  <a id="prodBtn_userAgent" role="button" style="margin-right:40px" class="btn btn-primary btn-lg">Production</a>
+		  <a id="sandBtn_userAgent" role="button" class="btn btn-primary btn-lg">Sandbox</a>
+	  </p>
+	</div>
+	
+	<div class="jumbotron">
+		<p>
+		 <h2>Username Password OAuth Flow.</h2>
+		  <p><i class="note">Note : Because the username and password flow passes credentials back and forth, avoid using this flow. Use it only for testing, when a user is not present at app startup, or with highly privileged apps. In these cases, set user permissions to minimize access and protect stored credentials from unauthorized access.</i></p>
+		  <a id="prodBtn_userPassword" role="button" style="margin-right:40px" class="btn btn-primary btn-lg">Production</a>
+		  <a id="sandBtn_userPassword" role="button" class="btn btn-primary btn-lg">Sandbox</a>
+	  </p>
+	</div>
+	
+	<div class="jumbotron">
+		<p>
+		 <h2>For returning users - <i> JWT OAuth Flow </i></h2>
+		 <p><i class="note">Note : Before using JWT flow, make sure your <b><u> username </u></b> has already validated connected app using some other flow, like User Agent flow. <a href="https://jwt.io/"> Use this tool to debug JSON token generated in Node.js application. </a> </i></p>
+		 <div class="form-group">
+			<label for="jwtUserName">Username to be used for JWT</label>
+			<input class="form-control" id="jwtUserName" type="text" value="development@dvg.com" />
+		  </div>
+  
+		  <a id="prodBtn_jwt" role="button" style="margin-right:40px" class="btn btn-primary btn-lg">Production</a>
+		  <a id="sandBtn_jwt" role="button" class="btn btn-primary btn-lg">Sandbox</a>
+	  </p>
+	</div>	
+
+    <script type="text/javascript" src="lib/jquery.js"></script> 
+	<script type="text/javascript" src="lib/jqueryCookies.js"> </script>  
+	
+	<script>  
+	
+	function clearAllCookies(){
+		$.cookie("AccToken",'') ;
+        $.cookie("APIVer", '') ;
+        $.cookie("InstURL",  '') ; 
+        $.cookie("idURL",  '') ; 
+		$.cookie("LoggeduserId",  '') ;
+	}
+	clearAllCookies();
+	
+	$( "#prodBtn_webServer" ).click(function() {
+	  window.location = 'webServerOAuth?isSandbox=false';
+	});
+	$( "#sandBtn_webServer" ).click(function() {
+	  window.location = 'webServerOAuth?isSandbox=true';
+	});
+	
+	$( "#prodBtn_userAgent" ).click(function() {
+	  window.location = 'userAgentOAuth?isSandbox=false';
+	});
+	$( "#sandBtn_userAgent" ).click(function() {
+	  window.location = 'userAgentOAuth?isSandbox=true';
+	}); 
+	
+	$( "#prodBtn_userPassword" ).click(function() {
+	  window.location = 'userPasswordOAuth?isSandbox=false';
+	});
+	$( "#sandBtn_userPassword" ).click(function() {
+	  window.location = 'userPasswordOAuth?isSandbox=true';
+	});
+	
+	$( "#prodBtn_jwt" ).click(function() {
+	  window.location = 'jwtOAuth?isSandbox=false&jwtUserName='+$("#jwtUserName").val();
+	});
+	$( "#sandBtn_jwt" ).click(function() {
+	  window.location = 'jwtOAuth?isSandbox=true&jwtUserName='+$("#jwtUserName").val();
+	}); 
+	 
+	    
+    </script>
+	<style>
+		.note{
+			font-size:1.5rem;
+		}
+		.form-control {
+			width : 40%;
+		}
+	</style>
+  </body>
+</html>
